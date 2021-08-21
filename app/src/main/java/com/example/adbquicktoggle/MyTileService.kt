@@ -29,11 +29,6 @@ class MyTileService : TileService() {
         qsTile.updateTile()
     }
 
-    /*override fun onTileAdded() {
-        super.onTileAdded()
-        setState();
-    }*/
-
     override fun onClick() {
         super.onClick()
         fun switchADB() {
@@ -42,7 +37,7 @@ class MyTileService : TileService() {
             setTileState(adbState)
             showADBState(adbState)
         }
-        
+
         if(isLocked) unlockAndRun { switchADB() }
         else if(!isLocked) switchADB()
 
