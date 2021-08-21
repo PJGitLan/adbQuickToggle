@@ -36,10 +36,16 @@ class MyTileService : TileService() {
 
     override fun onClick() {
         super.onClick()
-        setADBState(!getADBState())
-        val adbState = getADBState()
-        setTileState(adbState)
-        showADBState(adbState)
+        fun switchADB() {
+            setADBState(!getADBState())
+            val adbState = getADBState()
+            setTileState(adbState)
+            showADBState(adbState)
+        }
+        
+        if(isLocked) unlockAndRun { switchADB() }
+        else if(!isLocked) switchADB()
+
     }
 
     private fun showADBState(currState : Boolean) {
