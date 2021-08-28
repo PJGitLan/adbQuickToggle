@@ -19,14 +19,16 @@ class MyTileService : TileService() {
     }
 
     private fun setTileState(adbState : Boolean){
-        if (adbState){
+        qsTile.state = if(adbState) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+        qsTile.updateTile()
+        /*if (adbState){
             qsTile.state = Tile.STATE_ACTIVE
         }
         else if (!adbState) {
             qsTile.state = Tile.STATE_INACTIVE
+        }*/
 
-        }
-        qsTile.updateTile()
+        //TODO(Test and delete comments)
     }
 
     override fun onClick() {
@@ -51,8 +53,7 @@ class MyTileService : TileService() {
     }
 
     private fun getADBState(): Boolean {
-        val state = Settings.Global.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0)
-        return state == 1
+        return Settings.Global.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0) == 1
     }
 
     private fun setADBState(on: Boolean){
@@ -70,5 +71,6 @@ class MyTileService : TileService() {
         } catch (e: InterruptedException) {
             throw Exception(e)
         }
+        //TODO add source
     }
 }
